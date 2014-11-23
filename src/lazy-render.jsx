@@ -68,7 +68,6 @@ var LazyRender = React.createClass({
       this.state.childHeight,
       nextProps.maxHeight
     );
-    console.log(height);
 
     var numberOfItems = Math.ceil(height / this.state.childHeight);
 
