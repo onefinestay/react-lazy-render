@@ -13,8 +13,11 @@ var LazyRender = require('../');
 
 var Index = React.createClass({
   render: function() {
-    var rows = _.range(50).map(function(row) {
-      return <div style={{ height: 20 }}>{row} Fizz Buzz</div>;
+    var rows = _.range(50000).map(function(row) {
+      var fizzBuzz = '';
+      if (row % 3 === 0) fizzBuzz += 'Fizz';
+      if (row % 5 === 0) fizzBuzz += 'Buzz';
+      return <div style={{ height: 20 }}>{row + 1} {fizzBuzz}</div>;
     });
 
     return (
