@@ -1,0 +1,14 @@
+.header {
+    margin-top: 50px;
+
+    &__logo {
+        width: 200px;
+        margin: 0 auto;
+        display: block;
+    }
+
+    &__title {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+}
