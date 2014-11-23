@@ -9,7 +9,7 @@ var Install = React.createClass({
       <div className="install">
         <h2>Install</h2>
         <CodeSnippet language="bash" toggle={false}>
-          npm install react-choice
+          npm install react-lazy-render
         </CodeSnippet>
       </div>
     );
