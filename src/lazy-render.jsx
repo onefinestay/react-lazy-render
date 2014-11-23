@@ -29,6 +29,7 @@ var LazyRender = React.createClass({
     var childrenTop = Math.floor(scrollTop / this.state.childHeight);
     var childrenBottom = (this.props.children.length - childrenTop -
                           this.state.childrenToRender);
+
     if (childrenBottom < 0) {
       childrenBottom = 0;
     }
@@ -81,7 +82,7 @@ var LazyRender = React.createClass({
     );
 
     return (
-      <div style={{ height: this.props.height, overflowY: 'scroll' }}
+      <div style={{ height: this.props.height, overflowY: 'auto' }}
         ref="container"
         onScroll={this.onScroll}>
         {children}
