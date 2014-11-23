@@ -33,7 +33,7 @@ var Index = React.createClass({
 
           <div className="content">
             <div className="examples">
-              <LazyRender height={200}>
+              <LazyRender maxHeight={200}>
                 {rows}
               </LazyRender>
             </div>
