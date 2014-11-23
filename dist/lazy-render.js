@@ -71,7 +71,7 @@ var LazyRender = React.createClass({displayName: 'LazyRender',
 
     var numberOfItems = Math.ceil(height / this.state.childHeight);
 
-    if (height < this.props.maxHeight) {
+    if (height === this.props.maxHeight) {
       numberOfItems += this.props.padding;
     }
 
@@ -95,7 +95,7 @@ var LazyRender = React.createClass({displayName: 'LazyRender',
 
     var numberOfItems = Math.ceil(height / childHeight);
 
-    if (height < this.props.maxHeight) {
+    if (height === this.props.maxHeight) {
       numberOfItems += this.props.padding;
     }
 
