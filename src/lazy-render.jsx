@@ -29,6 +29,9 @@ var LazyRender = React.createClass({
     var childrenTop = Math.floor(scrollTop / this.state.childHeight);
     var childrenBottom = (this.props.children.length - childrenTop -
                           this.state.childrenToRender);
+    if (childrenBottom < 0) {
+      childrenBottom = 0;
+    }
 
     this.setState({
       childrenTop: childrenTop,

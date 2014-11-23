@@ -30,6 +30,10 @@ var LazyRender = React.createClass({displayName: 'LazyRender',
     var childrenBottom = (this.props.children.length - childrenTop -
                           this.state.childrenToRender);
 
+    if (childrenBottom < 0) {
+      childrenBottom = 0;
+    }
+
     this.setState({
       childrenTop: childrenTop,
       childrenBottom: childrenBottom
