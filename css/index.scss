@@ -1,0 +1,50 @@
+@import "variables";
+
+// Components
+@import "components/header";
+@import "components/footer";
+@import "components/code-snippet";
+@import "components/features";
+@import "components/ofs-credit";
+@import "components/tutorial";
+@import "components/pokemon";
+
+// Base
+body {
+  font-family: "Helvetica Neue","Helvetica",Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  width: 450px;
+  margin: 0 auto;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: lighter;
+  letter-spacing: 1.2px;
+  text-rendering: optimizeLegibility;
+  color: $ofs-pink;
+}
+
+p.info {
+  font-weight: 0.8rem;
+  color: #777;
+}
+
+.example-container {
+    border: 1px solid #bebebe;
+}
+
+.example-controls {
+    margin-bottom: 10px;
+
+    &__count {
+        color: #666;
+        margin-bottom: 10px;
+    }
+
+    &__button {
+        margin-right: 10px;
+    }
+}

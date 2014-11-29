@@ -1,0 +1,113 @@
+.header {
+  margin-top: 50px; }
+  .header__logo {
+    width: 200px;
+    margin: 0 auto;
+    display: block; }
+  .header__title {
+    text-align: center;
+    margin-bottom: 3rem; }
+
+.footer {
+  margin: 20px 0;
+  padding: 20px 0;
+  border-top: 1px solid #ccc; }
+  .footer__links {
+    text-align: center; }
+  .footer__link {
+    text-decoration: none;
+    display: inline-block;
+    margin-right: 10px;
+    color: #ff2558; }
+
+.code-snippet {
+  margin-top: 1rem;
+  font-size: 0.9rem; }
+  .code-snippet__arrow {
+    display: inline-block;
+    width: 0;
+    height: 0; }
+    .code-snippet__arrow--right {
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      border-left: 6px solid #AAAAAA;
+      border-right: 6px solid transparent; }
+    .code-snippet__arrow--up {
+      margin-right: 6px;
+      margin-bottom: 3px;
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid #AAAAAA;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent; }
+  .code-snippet__toggle-button {
+    color: #ff2558;
+    text-decoration: none; }
+    .code-snippet__toggle-button:hover {
+      color: #d80033; }
+
+.features {
+  overflow: hidden; }
+  .features__point {
+    margin-bottom: 0.5rem;
+    font-weight: 200; }
+
+.ofs-credit {
+  margin-bottom: 1rem; }
+  .ofs-credit__text {
+    text-align: center;
+    margin: 0;
+    color: #999;
+    margin-bottom: 0.5rem; }
+  .ofs-credit__logo {
+    display: block;
+    width: 200px;
+    margin: 0 auto; }
+
+.tutorial__example {
+  margin-bottom: 20px; }
+
+.pokemon__image {
+  width: 40px;
+  height: 40px;
+  display: inline-block; }
+  .pokemon__image img {
+    width: 100%; }
+.pokemon__number {
+  color: #777;
+  margin-right: 5px; }
+.pokemon__name {
+  display: inline-block;
+  padding-left: 20px;
+  margin-top: 5px;
+  vertical-align: top; }
+.pokemon__attributes {
+  color: #777;
+  font-size: 0.8rem;
+  margin-top: 5px; }
+
+body {
+  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  width: 450px;
+  margin: 0 auto; }
+
+h1, h2, h3, h4 {
+  font-weight: lighter;
+  letter-spacing: 1.2px;
+  text-rendering: optimizeLegibility;
+  color: #ff2558; }
+
+p.info {
+  font-weight: 0.8rem;
+  color: #777; }
+
+.example-container {
+  border: 1px solid #bebebe; }
+
+.example-controls {
+  margin-bottom: 10px; }
+  .example-controls__count {
+    color: #666;
+    margin-bottom: 10px; }
+  .example-controls__button {
+    margin-right: 10px; }

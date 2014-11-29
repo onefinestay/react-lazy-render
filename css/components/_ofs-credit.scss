@@ -1,0 +1,16 @@
+.ofs-credit {
+    margin-bottom: 1rem;
+
+    &__text {
+        text-align: center;
+        margin: 0;
+        color: #999;
+        margin-bottom: 0.5rem;
+    }
+
+    &__logo {
+        display: block;
+        width: 200px;
+        margin: 0 auto;
+    }
+}
