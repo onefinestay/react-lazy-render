@@ -1,7 +1,7 @@
 {
   "name": "react-lazy-render",
   "version": "0.1.0",
-  "description": "",
+  "description": "Lazy render for (very) large lists of data",
   "main": "dist/lazy-render.js",
   "author": "Jonathan Kim <jonathan.kim@onefinestay.com>",
   "repository": {
