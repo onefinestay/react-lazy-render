@@ -85,7 +85,9 @@ var LazyRender = React.createClass({displayName: 'LazyRender',
 
   componentDidMount: function() {
     var firstChild = this.refs['child-0'];
-    var childHeight = firstChild.getDOMNode().clientHeight;
+    var el = firstChild.getDOMNode();
+    var childHeight = (el.style.height ? el.style.height.replace('px', '') :
+                       null) || el.clientHeight;
 
     var height = this.getHeight(
       this.props.children.length,
