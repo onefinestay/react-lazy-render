@@ -2,7 +2,7 @@
 
 var React = require('react/addons');
 var _ = require('lodash');
-var Nonsense = require('Nonsense');
+var fs = require('fs');
 
 var Header = require('./components/header.jsx');
 var Footer = require('./components/footer.jsx');
@@ -65,6 +65,11 @@ var NAMES = [
   "Denver Patridge"
 ];
 
+var basicExample = fs.readFileSync(
+  __dirname + '/code-snippets/basic.jsx', 'utf8'
+);
+
+
 var Index = React.createClass({
   getInitialState: function() {
     return {
@@ -80,8 +85,6 @@ var Index = React.createClass({
   },
 
   render: function() {
-    var ns = new Nonsense(123);
-
     var rows = _.range(this.state.limit).map(function(row) {
       var index = row % 50;
       return <div style={{ height: 20, padding: "5px 10px" }}>
@@ -124,6 +127,10 @@ var Index = React.createClass({
               <LazyRender maxHeight={200} className="example-container">
                 {rows}
               </LazyRender>
+
+              <CodeSnippet language="javascript" toggle={false}>
+                {basicExample}
+              </CodeSnippet>
             </div>
 
             <Install />
