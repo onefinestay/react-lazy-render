@@ -15,6 +15,11 @@ module.exports = {
           'jsx?harmony&sourceMap=true'
         ]
       }
+    ],
+    postLoaders: [
+      {
+        loader: "transform/cacheable?brfs"
+      }
     ]
   },
   resolve: {
