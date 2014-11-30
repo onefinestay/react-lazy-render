@@ -26,7 +26,7 @@ var LazyRender = React.createClass({
     };
   },
 
-  onScroll: function(event) {
+  onScroll: function() {
     var container = this.refs.container.getDOMNode();
     var scrollTop = container.scrollTop;
 
