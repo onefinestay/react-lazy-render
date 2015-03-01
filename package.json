@@ -46,7 +46,7 @@
     "gulp-sass": "^1.2.2",
     "gulp-util": "^3.0.1",
     "gulp-watch": "^2.0.0",
-    "jest-cli": "^0.1.18",
+    "jest-cli": "^0.4.0",
     "jsx-loader": "^0.12.2",
     "react-tools": "^0.12.0",
     "reactify": "^0.15.2",
