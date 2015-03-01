@@ -1,15 +1,14 @@
 "use strict";
 
 var React = require('react/addons');
-var _ = require('lodash');
 var cloneWithProps = React.addons.cloneWithProps;
-var cx = React.addons.classSet;
 
 var LazyRender = React.createClass({
   propTypes: {
     children: React.PropTypes.array.isRequired,
     maxHeight: React.PropTypes.number.isRequired,
 
+    className: React.PropTypes.string,
     itemPadding: React.PropTypes.number
   },
 
@@ -136,18 +135,9 @@ var LazyRender = React.createClass({
       } key="bottom"></div>
     );
 
-    var classes = {};
-    if (this.props.className) {
-      if (typeof this.props.className === 'string') {
-        classes[this.props.className] = true;
-      } else {
-        classes = _.assign({}, classes, this.props.className);
-      }
-    }
-
     return (
       <div style={{ height: this.state.height, overflowY: 'auto' }}
-        className={cx(classes)}
+        className={this.props.className}
         ref="container"
         onScroll={this.onScroll}>
         {children}
