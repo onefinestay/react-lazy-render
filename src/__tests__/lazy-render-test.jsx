@@ -1,11 +1,11 @@
 /* global jest, describe, it, expect */
 "use strict";
 
-jest.dontMock('../lazy-render.jsx');
+jest.dontMock('../LazyRender.jsx');
 
 describe('LazyRender', function() {
   var React = require('react/addons');
-  var LazyRender = require('../lazy-render.jsx');
+  var LazyRender = require('../LazyRender.jsx');
   var TestUtils = React.addons.TestUtils;
 
   it('renders children', function() {
