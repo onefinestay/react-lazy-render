@@ -2,8 +2,14 @@
   "name": "react-lazy-render",
   "version": "0.2.0",
   "description": "Lazy render for (very) large lists of data",
-  "main": "dist/lazy-render.js",
+  "main": "dist/LazyRender.js",
   "author": "Jonathan Kim <jonathan.kim@onefinestay.com>",
+  "keywords": [
+    "react",
+    "react-component",
+    "lazy",
+    "render"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/onefinestay/react-lazy-render"
