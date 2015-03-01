@@ -11,6 +11,35 @@ Lazy render for (very) large lists of data
 * Incredibly simple to use
 * BYOC - Bring your own child components
 
+## Install
+
+The easiest way to use **React Lazy Render** is to install it from NPM and include it in
+your own build process (using [Webpack](http://webpack.github.io/), [Browserify](http://browserify.org/), etc).
+
+```bash
+npm install react-lazy-render
+```
+
+## Usage
+
+```js
+var LazyRender = require('react-lazy-render');
+
+var children = [];
+for (var i = 0; i < 5000; i++) {
+  // each child must have a consistent height
+  children.push(
+    <div style={{ height: 20 }}>
+      #{i}
+    </div>
+  );
+}
+
+<LazyRender maxHeight={300} className="my-list" itemPadding={5}>
+  {children}
+</LazyRender>
+```
+
 ## Contribute
 
 We love contributions! Whether it is a simple typo fix or a wholesale rewrite to
