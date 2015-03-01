@@ -8,12 +8,14 @@ var cx = React.addons.classSet;
 var LazyRender = React.createClass({
   propTypes: {
     children: React.PropTypes.array.isRequired,
-    maxHeight: React.PropTypes.number.isRequired
+    maxHeight: React.PropTypes.number.isRequired,
+
+    itemPadding: React.PropTypes.number
   },
 
   getDefaultProps: function() {
     return {
-      padding: 3
+      itemPadding: 3
     };
   },
 
@@ -72,7 +74,7 @@ var LazyRender = React.createClass({
     var numberOfItems = Math.ceil(height / this.state.childHeight);
 
     if (height === this.props.maxHeight) {
-      numberOfItems += this.props.padding;
+      numberOfItems += this.props.itemPadding;
     }
 
     this.setState({
@@ -98,7 +100,7 @@ var LazyRender = React.createClass({
     var numberOfItems = Math.ceil(height / childHeight);
 
     if (height === this.props.maxHeight) {
-      numberOfItems += this.props.padding;
+      numberOfItems += this.props.itemPadding;
     }
 
     this.setState({
