@@ -87,7 +87,7 @@ var Index = React.createClass({
   render: function() {
     var rows = _.range(this.state.limit).map(function(row) {
       var index = row % 50;
-      return <div style={{ height: 20, padding: "5px 10px" }}>
+      return <div className="list-item">
         #{row + 1} {NAMES[index]}
       </div>;
     });
