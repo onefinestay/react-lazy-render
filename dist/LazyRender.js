@@ -1,9 +1,10 @@
 "use strict";
 
 var React = require('react/addons');
+var elementSize = require("element-size");
 var cloneWithProps = React.addons.cloneWithProps;
 
-var LazyRender = React.createClass({displayName: 'LazyRender',
+var LazyRender = React.createClass({displayName: "LazyRender",
   propTypes: {
     children: React.PropTypes.array.isRequired,
     maxHeight: React.PropTypes.number.isRequired,
@@ -55,6 +56,11 @@ var LazyRender = React.createClass({displayName: 'LazyRender',
     }
   },
 
+  getElementHeight: function(element) {
+    var marginTop = parseInt(window.getComputedStyle(element).marginTop);
+    return elementSize(element)[1] - marginTop; //remove one margin since the margins are shared by adjacent elements
+  },
+
   componentWillReceiveProps: function(nextProps) {
     var childrenTop = Math.floor(this.state.scrollTop / this.state.childHeight);
     var childrenBottom = (nextProps.children.length - childrenTop -
@@ -87,8 +93,7 @@ var LazyRender = React.createClass({displayName: 'LazyRender',
   componentDidMount: function() {
     var firstChild = this.refs['child-0'];
     var el = firstChild.getDOMNode();
-    var childHeight = (el.style.height ? el.style.height.replace('px', '') :
-                       null) || el.clientHeight;
+    var childHeight = this.getElementHeight(el);
 
     var height = this.getHeight(
       this.props.children.length,
