@@ -91,9 +91,7 @@ var LazyRender = React.createClass({
   },
 
   componentDidMount: function() {
-    var firstChild = this.refs['child-0'];
-    var el = firstChild.getDOMNode();
-    var childHeight = this.getElementHeight(el);
+    var childHeight = this.getChildHeight();
 
     var height = this.getHeight(
       this.props.children.length,
@@ -114,6 +112,19 @@ var LazyRender = React.createClass({
       childrenBottom: this.props.children.length - numberOfItems,
       height: height
     });
+  },
+
+  componentDidUpdate: function() {
+    //important to update the child height in the case that the children change(example: ajax call for data)
+    if(this.state.childHeight !== this.getChildHeight())
+      this.setState({childHeight: this.getChildHeight()});
+
+  },
+
+  getChildHeight: function() {
+    var firstChild = this.refs['child-0'];
+    var el = firstChild.getDOMNode();
+    return this.getElementHeight(el);
   },
 
   render: function() {
