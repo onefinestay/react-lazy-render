@@ -116,9 +116,9 @@ var LazyRender = React.createClass({
 
   componentDidUpdate: function() {
     //important to update the child height in the case that the children change(example: ajax call for data)
-    if(this.state.childHeight !== this.getChildHeight())
+    if(this.state.childHeight !== this.getChildHeight()) {
       this.setState({childHeight: this.getChildHeight()});
-
+    }
   },
 
   getChildHeight: function() {
