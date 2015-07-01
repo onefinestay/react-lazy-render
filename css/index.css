@@ -86,7 +86,7 @@
   margin-top: 5px; }
 
 body {
-  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue","Helvetica",Helvetica,Arial,sans-serif;
   font-size: 16px;
   width: 450px;
   margin: 0 auto; }
@@ -111,3 +111,9 @@ p.info {
     margin-bottom: 10px; }
   .example-controls__button {
     margin-right: 10px; }
+
+.list-item {
+  height: 20px;
+  padding: 5px 10px;
+  background-color: #E3F3FB;
+  margin: 5px 0px; }
