@@ -38,7 +38,7 @@
   "license": "Apache 2.0",
   "dependencies": {
     "element-size": "^1.1.1",
-    "react": "^0.12.0"
+    "react": "~0.13.3"
   },
   "devDependencies": {
     "brfs": "^1.2.0",
