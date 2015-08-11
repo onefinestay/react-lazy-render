@@ -57,7 +57,8 @@ var LazyRender = React.createClass({
   },
 
   getElementHeight: function(element) {
-    var marginTop = parseInt(window.getComputedStyle(element).marginTop);
+    var marginTop = parseInt(window.getComputedStyle(element).marginTop) || 0;
+    console.log(marginTop);
     return elementSize(element)[1] - marginTop; //remove one margin since the margins are shared by adjacent elements
   },
 
