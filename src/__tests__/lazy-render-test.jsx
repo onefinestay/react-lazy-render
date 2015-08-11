@@ -2,6 +2,7 @@
 "use strict";
 
 jest.dontMock('../LazyRender.jsx');
+jest.dontMock('element-size');
 
 describe('LazyRender', function() {
   var React = require('react/addons');
