@@ -2,7 +2,6 @@
 
 var React = require('react/addons');
 var elementSize = require("element-size");
-var cloneWithProps = React.addons.cloneWithProps;
 
 var LazyRender = React.createClass({
   propTypes: {
@@ -29,7 +28,7 @@ var LazyRender = React.createClass({
   },
 
   onScroll: function() {
-    var container = this.refs.container.getDOMNode();
+    var container = React.findDOMNode(this.refs.container);
     var scrollTop = container.scrollTop;
 
     var childrenTop = Math.floor(scrollTop / this.state.childHeight);
@@ -57,8 +56,17 @@ var LazyRender = React.createClass({
   },
 
   getElementHeight: function(element) {
-    var marginTop = parseInt(window.getComputedStyle(element).marginTop) || 0;
-    return elementSize(element)[1] - marginTop; //remove one margin since the margins are shared by adjacent elements
+    var elementStyle = window.getComputedStyle(element);
+
+    var marginTop = parseInt(elementStyle.marginTop) || 0;
+    var marginBottom = parseInt(elementStyle.marginBottom) || 0;
+
+    var elementHeight =
+      (elementStyle.height ? parseInt(elementStyle.height) : null)
+      || element.clientHeight
+      || elementSize(element)[1] - marginTop - marginBottom;
+
+    return elementHeight + marginBottom; //remove one margin since the margins are shared by adjacent elements
   },
 
   componentWillReceiveProps: function(nextProps) {
@@ -129,7 +137,7 @@ var LazyRender = React.createClass({
 
   getChildHeight: function() {
     var firstChild = this.refs['child-0'];
-    var el = firstChild.getDOMNode();
+    var el = React.findDOMNode(firstChild);
     return this.getElementHeight(el);
   },
 
@@ -140,7 +148,7 @@ var LazyRender = React.createClass({
     var childrenToRender = this.props.children.slice(start, end);
     var children = childrenToRender.map(function(child, index) {
       if (index === 0) {
-        return cloneWithProps(child, {ref: 'child-' + index, key: index});
+        return React.cloneElement(child, {ref: 'child-' + index});
       }
       return child;
     });
