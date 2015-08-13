@@ -59,5 +59,24 @@ describe('LazyRender', function() {
     );
     expect(renderedChildren.length).toEqual(15);
   });
+
+  it.only('renders children passed in by data', function() {
+    var childData = [];
+
+    for(var i = 0; i < 10; i++) {
+      childData.push({value: i, label: "Number " + i});
+    }
+
+    function childGen(data, index) {
+      return <div className="child" key={data.value} style={{ height: 20 }}>{data.label}</div>
+    }
+
+    var lazy = makeComponent(0, {generatorData: childData, generatorFunction: childGen});
+
+    var renderedChildren = TestUtils.scryRenderedDOMComponentsWithClass(
+      lazy, 'child'
+    );
+    expect(renderedChildren.length).toEqual(10);
+  });
 });
 
