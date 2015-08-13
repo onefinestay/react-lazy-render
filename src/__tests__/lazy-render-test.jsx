@@ -24,6 +24,15 @@ describe('LazyRender', function() {
     return component;
   }
 
+  it('renders 1 child', function() {
+    var lazy = makeComponent(1);
+
+    var renderedChildren = TestUtils.scryRenderedDOMComponentsWithClass(
+      lazy, 'child'
+    );
+    expect(renderedChildren.length).toEqual(1);
+  });
+
   it('renders children', function() {
     var lazy = makeComponent(10);
 
