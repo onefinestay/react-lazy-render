@@ -2,7 +2,6 @@
 
 var React = require('react/addons');
 var elementSize = require("element-size");
-var cloneWithProps = React.addons.cloneWithProps;
 
 var LazyRender = React.createClass({displayName: "LazyRender",
   propTypes: {
@@ -10,7 +9,10 @@ var LazyRender = React.createClass({displayName: "LazyRender",
     maxHeight: React.PropTypes.number.isRequired,
 
     className: React.PropTypes.string,
-    itemPadding: React.PropTypes.number
+    itemPadding: React.PropTypes.number,
+
+    generatorData: React.PropTypes.array,
+    generatorFunction: React.PropTypes.func
   },
 
   getDefaultProps: function() {
@@ -24,16 +26,32 @@ var LazyRender = React.createClass({displayName: "LazyRender",
       childrenTop: 0,
       childrenToRender: 10,
       scrollTop: 0,
-      height: this.props.maxHeight
+      height: this.props.maxHeight,
+      generatorData: null,
+      generatorFunction: null
     };
   },
 
+  componentWillMount: function() {
+    var hasGeneratorData = this.props.generatorData === null;
+    var hasGeneratorFunction = this.props.generatorFunction === null;
+
+    if(!hasGeneratorData && hasGeneratorFunction) {
+      console.error('generatorFunction was supplied, but generatorData was not');
+    }
+
+    if(hasGeneratorData && !hasGeneratorFunction) {
+      console.log('generatorData was supplied without generatorFunction');
+    }
+  },
+
   onScroll: function() {
-    var container = this.refs.container.getDOMNode();
+    var container = React.findDOMNode(this.refs.container);
     var scrollTop = container.scrollTop;
+    var childrenLength = this.getChildrenLength(this.props);
 
     var childrenTop = Math.floor(scrollTop / this.state.childHeight);
-    var childrenBottom = (this.props.children.length - childrenTop -
+    var childrenBottom = (childrenLength - childrenTop -
                           this.state.childrenToRender);
 
     if (childrenBottom < 0) {
@@ -57,18 +75,41 @@ var LazyRender = React.createClass({displayName: "LazyRender",
   },
 
   getElementHeight: function(element) {
-    var marginTop = parseInt(window.getComputedStyle(element).marginTop);
-    return elementSize(element)[1] - marginTop; //remove one margin since the margins are shared by adjacent elements
+    if(element === null) {
+      return 0;
+    }
+
+    var elementStyle = window.getComputedStyle(element);
+
+    var marginTop = parseInt(elementStyle.marginTop) || 0;
+    var marginBottom = parseInt(elementStyle.marginBottom) || 0;
+
+    var elementHeight =
+      (elementStyle.height ? parseInt(elementStyle.height) : null)
+      || element.clientHeight
+      || elementSize(element)[1] - marginTop - marginBottom;
+
+    return elementHeight + marginBottom; //remove one margin since the margins are shared by adjacent elements
+  },
+
+  getChildrenLength: function(props) {
+    if(props.generatorData) {
+      return props.generatorData.length || React.Children.count(props.children);
+    }
+
+    return React.Children.count(props.children);
   },
 
   componentWillReceiveProps: function(nextProps) {
     var childHeight = this.state.childHeight || 1;
+    var childrenLength = this.getChildrenLength(nextProps);
+
     if(!this.state.childHeight && this.getChildHeight){
       childHeight = this.getChildHeight();
     }
 
     var childrenTop = Math.floor(this.state.scrollTop / childHeight);
-    var childrenBottom = (nextProps.children.length - childrenTop -
+    var childrenBottom = (childrenLength - childrenTop -
                           this.state.childrenToRender);
 
     if (childrenBottom < 0) {
@@ -76,7 +117,7 @@ var LazyRender = React.createClass({displayName: "LazyRender",
     }
 
     var height = this.getHeight(
-      nextProps.children.length,
+      childrenLength,
       childHeight,
       nextProps.maxHeight
     );
@@ -98,9 +139,10 @@ var LazyRender = React.createClass({displayName: "LazyRender",
 
   componentDidMount: function() {
     var childHeight = this.getChildHeight();
+    var childrenLength = this.getChildrenLength(this.props);
 
     var height = this.getHeight(
-      this.props.children.length,
+      childrenLength,
       childHeight,
       this.props.maxHeight
     );
@@ -115,7 +157,7 @@ var LazyRender = React.createClass({displayName: "LazyRender",
       childHeight: childHeight,
       childrenToRender: numberOfItems,
       childrenTop: 0,
-      childrenBottom: this.props.children.length - numberOfItems,
+      childrenBottom: childrenLength - numberOfItems,
       height: height
     });
   },
@@ -129,21 +171,60 @@ var LazyRender = React.createClass({displayName: "LazyRender",
 
   getChildHeight: function() {
     var firstChild = this.refs['child-0'];
-    var el = firstChild.getDOMNode();
+    var el = React.findDOMNode(firstChild);
     return this.getElementHeight(el);
   },
 
-  render: function() {
+  generateChildren: function() {
+    var start = this.state.childrenTop;
+    var end = this.state.childrenTop + this.state.childrenToRender;
+    var generationData = this.props.generatorData || [];
+    generationData = generationData.slice(start, end);
+
+    if(generationData.length === 0) {
+      return this.cloneChildren();
+    }
+
+    return generationData.map(function(data, index) {
+      var element = this.props.generatorFunction(data, index + start);
+
+      if(index === 0) {
+        return React.cloneElement(element, {ref: 'child-' + index});
+      }
+
+      return element
+    }, this);
+  },
+
+  cloneChildren: function() {
     var start = this.state.childrenTop;
     var end = this.state.childrenTop + this.state.childrenToRender;
 
-    var childrenToRender = this.props.children.slice(start, end);
-    var children = childrenToRender.map(function(child, index) {
+    var children = this.props.children;
+    if(React.Children.count(children) === 1) {
+      children = [children];
+    }
+
+    var childrenToRender = children.slice(start, end);
+
+    return childrenToRender.map(function(child, index) {
       if (index === 0) {
-        return cloneWithProps(child, {ref: 'child-' + index, key: index});
+        return React.cloneElement(child, {ref: 'child-' + index});
       }
       return child;
     });
+  },
+
+  getChildren: function() {
+    if(this.props.generatorFunction) {
+      return this.generateChildren();
+    }
+
+    return this.cloneChildren();
+  },
+
+  render: function() {
+    var children = this.getChildren();
 
     children.unshift(
       React.createElement("div", {style: 
