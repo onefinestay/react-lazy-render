@@ -60,7 +60,7 @@ describe('LazyRender', function() {
     expect(renderedChildren.length).toEqual(15);
   });
 
-  it.only('renders children passed in by data', function() {
+  it('renders children passed in by data', function() {
     var childData = [];
 
     for(var i = 0; i < 10; i++) {
@@ -78,5 +78,20 @@ describe('LazyRender', function() {
     );
     expect(renderedChildren.length).toEqual(10);
   });
+
+  it('renders default children when it has no data to display', function() {
+    var childData = [];
+
+    function childGen() {
+      return <div>Blank</div>
+    }
+
+    var lazy = makeComponent(1, {generatorData: childData, generatorFunction: childGen});
+
+    var renderedChildren = TestUtils.scryRenderedDOMComponentsWithClass(
+      lazy, 'child'
+    );
+    expect(renderedChildren.length).toEqual(1);
+  })
 });
 

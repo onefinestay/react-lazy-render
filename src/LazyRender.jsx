@@ -94,10 +94,10 @@ var LazyRender = React.createClass({
 
   getChildrenLength: function(props) {
     if(props.generatorData) {
-      return props.generatorData.length;
+      return props.generatorData.length || React.Children.count(props.children);
     }
 
-    return props.children.length;
+    return React.Children.count(props.children);
   },
 
   componentWillReceiveProps: function(nextProps) {
@@ -181,6 +181,10 @@ var LazyRender = React.createClass({
     var generationData = this.props.generatorData || [];
     generationData = generationData.slice(start, end);
 
+    if(generationData.length === 0) {
+      return this.cloneChildren();
+    }
+
     return generationData.map(function(data, index) {
       var element = this.props.generatorFunction(data, index + start);
 
@@ -196,7 +200,12 @@ var LazyRender = React.createClass({
     var start = this.state.childrenTop;
     var end = this.state.childrenTop + this.state.childrenToRender;
 
-    var childrenToRender = this.props.children.slice(start, end);
+    var children = this.props.children;
+    if(React.Children.count(children) === 1) {
+      children = [children];
+    }
+
+    var childrenToRender = children.slice(start, end);
 
     return childrenToRender.map(function(child, index) {
       if (index === 0) {
