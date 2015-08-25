@@ -108,14 +108,6 @@ var LazyRender = React.createClass({
       childHeight = this.getChildHeight();
     }
 
-    var childrenTop = Math.floor(this.state.scrollTop / childHeight);
-    var childrenBottom = (childrenLength - childrenTop -
-                          this.state.childrenToRender);
-
-    if (childrenBottom < 0) {
-      childrenBottom = 0;
-    }
-
     var height = this.getHeight(
       childrenLength,
       childHeight,
@@ -127,6 +119,17 @@ var LazyRender = React.createClass({
     if (height === this.props.maxHeight) {
       numberOfItems += this.props.itemPadding;
     }
+
+    var childrenTop = Math.floor(this.state.scrollTop / childHeight);
+
+    // if children top is larger than the max item count, set it to the bottom
+    childrenTop = Math.min(childrenTop, childrenLength - numberOfItems);
+    childrenTop = Math.max(childrenTop, 0);
+
+    var childrenBottom = (childrenLength - childrenTop -
+                          this.state.childrenToRender);
+
+    childrenBottom = Math.max(childrenBottom, 0);
 
     this.setState({
       childHeight: childHeight,
