@@ -5,7 +5,6 @@ var elementSize = require("element-size");
 
 var LazyRender = React.createClass({displayName: "LazyRender",
   propTypes: {
-    children: React.PropTypes.array.isRequired,
     maxHeight: React.PropTypes.number.isRequired,
 
     className: React.PropTypes.string,
