@@ -1,7 +1,6 @@
 "use strict";
 
 var React = require('react/addons');
-var elementSize = require("element-size");
 
 var LazyRender = React.createClass({
   propTypes: {
@@ -80,15 +79,24 @@ var LazyRender = React.createClass({
 
     var elementStyle = window.getComputedStyle(element);
 
-    var marginTop = parseInt(elementStyle.marginTop) || 0;
-    var marginBottom = parseInt(elementStyle.marginBottom) || 0;
+    var height = parseFloat(elementStyle.getPropertyValue('height')) || 0
 
-    var elementHeight =
-      (elementStyle.height ? parseInt(elementStyle.height) : null)
-      || element.clientHeight
-      || elementSize(element)[1] - marginTop - marginBottom;
+    var ua = window.navigator.userAgent;
+    var ie10orOlder = ua.indexOf("MSIE ") >= 0;
+    var ie11 = ua.indexOf("Trident") >= 0;
 
-    return elementHeight + marginBottom; //remove one margin since the margins are shared by adjacent elements
+    if(ie10orOlder || ie11) {
+      var borderTop = parseFloat(elementStyle.getPropertyValue('border-top-width')) || 0
+      var borderBottom = parseFloat(elementStyle.getPropertyValue('border-bottom-width')) || 0
+      var marginTop = parseFloat(elementStyle.getPropertyValue('margin-top')) || 0
+      var marginBottom = parseFloat(elementStyle.getPropertyValue('margin-bottom')) || 0
+      var paddingTop = parseFloat(elementStyle.getPropertyValue('padding-top')) || 0
+      var paddingBottom = parseFloat(elementStyle.getPropertyValue('padding-bottom')) || 0
+      
+      height += borderTop + borderBottom + marginTop + marginBottom + paddingTop + paddingBottom;
+    }
+
+    return height;
   },
 
   getChildrenLength: function(props) {
