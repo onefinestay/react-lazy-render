@@ -1,6 +1,6 @@
 "use strict";
 
-var React = require('react/addons');
+var React = require('react');
 var elementSize = require("element-size");
 
 var LazyRender = React.createClass({displayName: "LazyRender",
@@ -46,7 +46,7 @@ var LazyRender = React.createClass({displayName: "LazyRender",
   },
 
   onScroll: function() {
-    var container = React.findDOMNode(this.refs.container);
+    var container = this.refs.container;
     var scrollTop = container.scrollTop;
     var childrenLength = this.getChildrenLength(this.props);
 
@@ -174,8 +174,8 @@ var LazyRender = React.createClass({displayName: "LazyRender",
 
   getChildHeight: function() {
     var firstChild = this.refs['child-0'];
-    var el = React.findDOMNode(firstChild);
-    return this.getElementHeight(el);
+
+    return this.getElementHeight(firstChild);
   },
 
   generateChildren: function() {

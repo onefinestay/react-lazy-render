@@ -13,6 +13,8 @@ var sass = require('gulp-sass');
 var notify = require('gulp-notify');
 var duration = require('gulp-duration');
 var deploy = require('gulp-gh-pages');
+var browserify = require('browserify');
+var transform = require('vinyl-transform');
 
 gulp.task('build-js', function() {
   // build javascript files
@@ -29,12 +31,21 @@ gulp.task('watch-js', function() {
 });
 
 gulp.task('build-example', ['build-js'], function() {
-  return gulp.src('./example/index.jsx')
-    .pipe(render({
-      template: '<!doctype html>' +
-                '<%=body%>'
-      }))
-    .pipe(gulp.dest('./example'));
+    // var browserified = transform(function(filename) {
+    //   var b = browserify(filename);
+    //   return b.bundle();
+    // });
+
+    // return gulp.src('./example/app-example.js')
+    //   .pipe(react())
+    //   .pipe(browserified)
+    //   .pipe(gulp.dest('example'));
+  // return gulp.src('./example/index.jsx')
+  //   .pipe(render({
+  //     template: '<!doctype html>' +
+  //               '<%=body%>'
+  //     }))
+  //   .pipe(gulp.dest('./example'));
 });
 
 gulp.task('build-example-scss', function() {

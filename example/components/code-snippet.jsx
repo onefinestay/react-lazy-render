@@ -1,8 +1,8 @@
 /* global hljs */
 "use strict";
 
-var React = require('react/addons');
-var cx = React.addons.classSet;
+var React = require('react');
+var cx = require('classnames');
 
 var CodeSnippet = React.createClass({
   propTypes: {
@@ -34,7 +34,7 @@ var CodeSnippet = React.createClass({
       visible: value
     }, function() {
       if (value) {
-        var el = self.refs.codeBlock.getDOMNode();
+        var el = self.refs.codeBlock;
         hljs.highlightBlock(el);
       }
     });
@@ -42,7 +42,7 @@ var CodeSnippet = React.createClass({
 
   componentDidMount: function() {
     if (this.state.visible) {
-      var el = this.refs.codeBlock.getDOMNode();
+      var el = this.refs.codeBlock;
       hljs.highlightBlock(el);
     }
   },
