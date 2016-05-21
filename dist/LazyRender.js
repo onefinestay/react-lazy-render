@@ -238,22 +238,22 @@ var LazyRender = React.createClass({displayName: "LazyRender",
     var children = this.getChildren();
 
     children.unshift(
-      React.createElement("div", {style:
-        { height: this.state.childrenTop * this.state.childHeight},
+      React.createElement("div", {style: 
+        { height: this.state.childrenTop * this.state.childHeight}, 
       key: "top"})
     );
 
     children.push(
-      React.createElement("div", {style:
-        { height: this.state.childrenBottom * this.state.childHeight},
+      React.createElement("div", {style: 
+        { height: this.state.childrenBottom * this.state.childHeight}, 
       key: "bottom"})
     );
 
     return (
-      React.createElement("div", {style: { height: this.state.height, overflowY: 'auto'},
-        className: this.props.className,
-        ref: "container",
-        onScroll: this.onScroll},
+      React.createElement("div", {style: { height: this.state.height, overflowY: 'auto'}, 
+        className: this.props.className, 
+        ref: "container", 
+        onScroll: this.onScroll}, 
         children
       )
     );
