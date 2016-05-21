@@ -1,11 +1,7 @@
 "use strict";
 
-<<<<<<< HEAD
 var React = require('react');
 var elementSize = require("element-size");
-=======
-var React = require('react/addons');
->>>>>>> master
 
 var LazyRender = React.createClass({
   propTypes: {
@@ -97,7 +93,7 @@ var LazyRender = React.createClass({
       var marginBottom = parseFloat(elementStyle.getPropertyValue('margin-bottom')) || 0
       var paddingTop = parseFloat(elementStyle.getPropertyValue('padding-top')) || 0
       var paddingBottom = parseFloat(elementStyle.getPropertyValue('padding-bottom')) || 0
-      
+
       height += borderTop + borderBottom + marginTop + marginBottom + paddingTop + paddingBottom;
     }
 

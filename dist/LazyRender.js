@@ -1,11 +1,7 @@
 "use strict";
 
-<<<<<<< HEAD
 var React = require('react');
 var elementSize = require("element-size");
-=======
-var React = require('react/addons');
->>>>>>> master
 
 var LazyRender = React.createClass({displayName: "LazyRender",
   propTypes: {
@@ -97,7 +93,7 @@ var LazyRender = React.createClass({displayName: "LazyRender",
       var marginBottom = parseFloat(elementStyle.getPropertyValue('margin-bottom')) || 0
       var paddingTop = parseFloat(elementStyle.getPropertyValue('padding-top')) || 0
       var paddingBottom = parseFloat(elementStyle.getPropertyValue('padding-bottom')) || 0
-      
+
       height += borderTop + borderBottom + marginTop + marginBottom + paddingTop + paddingBottom;
     }
 
@@ -242,22 +238,22 @@ var LazyRender = React.createClass({displayName: "LazyRender",
     var children = this.getChildren();
 
     children.unshift(
-      React.createElement("div", {style: 
-        { height: this.state.childrenTop * this.state.childHeight}, 
+      React.createElement("div", {style:
+        { height: this.state.childrenTop * this.state.childHeight},
       key: "top"})
     );
 
     children.push(
-      React.createElement("div", {style: 
-        { height: this.state.childrenBottom * this.state.childHeight}, 
+      React.createElement("div", {style:
+        { height: this.state.childrenBottom * this.state.childHeight},
       key: "bottom"})
     );
 
     return (
-      React.createElement("div", {style: { height: this.state.height, overflowY: 'auto'}, 
-        className: this.props.className, 
-        ref: "container", 
-        onScroll: this.onScroll}, 
+      React.createElement("div", {style: { height: this.state.height, overflowY: 'auto'},
+        className: this.props.className,
+        ref: "container",
+        onScroll: this.onScroll},
         children
       )
     );
