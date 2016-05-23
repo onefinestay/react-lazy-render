@@ -93,13 +93,7 @@ var Index = React.createClass({
     });
 
     return (
-      <html>
-        <head>
-          <title>React Lazy Render Demo</title>
-          <link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.0/styles/docco.min.css' rel='stylesheet' type='text/css'></link>
-          <link href="css/index.css" rel="stylesheet"></link>
-        </head>
-        <body>
+        <div className="index-component-container">
           <Header />
           <GithubRibbon />
 
@@ -137,12 +131,8 @@ var Index = React.createClass({
           </div>
 
           <Footer />
+        </div>
 
-          <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.0/highlight.min.js" charSet="utf-8"></script>
-          <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.0/languages/javascript.min.js" charSet="utf-8"></script>
-          <script src="build/index.js"></script>
-        </body>
-      </html>
     );
   }
 });

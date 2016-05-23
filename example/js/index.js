@@ -2,9 +2,9 @@
 
 var React = require('react');
 var ReactDOM = require('react-dom');
-var Index = React.createFactory(require('../index.jsx'));
+var Index = require('../index.jsx');
 
 ReactDOM.render(
-  Index(),
-  document
+  <Index />,
+  document.getElementById('app-container')
 );

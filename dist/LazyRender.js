@@ -228,16 +228,17 @@ var LazyRender = React.createClass({displayName: "LazyRender",
 
   render: function() {
     var children = this.getChildren();
-
+    var childHeight = (this.state.childHeight) ? this.state.childHeight : 0;
+    var childrenBottom = (this.state.childrenBottom) ? this.state.childrenBottom : 0;
     children.unshift(
       React.createElement("div", {style: 
-        { height: this.state.childrenTop * this.state.childHeight}, 
+        { height: this.state.childrenTop * childHeight}, 
       key: "top"})
     );
 
     children.push(
       React.createElement("div", {style: 
-        { height: this.state.childrenBottom * this.state.childHeight}, 
+        { height: childrenBottom * childHeight}, 
       key: "bottom"})
     );
 

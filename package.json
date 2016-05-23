@@ -40,8 +40,8 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "element-size": "^1.1.1",
-    "react": "15.0.2",
-    "react-dom": "^15.0.2"
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0"
   },
   "devDependencies": {
     "brfs": "^1.2.0",

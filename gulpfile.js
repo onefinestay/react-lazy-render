@@ -30,31 +30,13 @@ gulp.task('watch-js', function() {
   });
 });
 
-gulp.task('build-example', ['build-js'], function() {
-    // var browserified = transform(function(filename) {
-    //   var b = browserify(filename);
-    //   return b.bundle();
-    // });
-
-    // return gulp.src('./example/app-example.js')
-    //   .pipe(react())
-    //   .pipe(browserified)
-    //   .pipe(gulp.dest('example'));
-  // return gulp.src('./example/index.jsx')
-  //   .pipe(render({
-  //     template: '<!doctype html>' +
-  //               '<%=body%>'
-  //     }))
-  //   .pipe(gulp.dest('./example'));
-});
-
 gulp.task('build-example-scss', function() {
   gulp.src('./example/css/**/*.scss')
     .pipe(sass())
     .pipe(gulp.dest('./example/css'));
 });
 
-gulp.task('watch-example', ['build-js', 'build-example'], function() {
+gulp.task('watch-example', ['build-js'], function() {
   watch(
     ['./example/**/*.{js,jsx}', './src/*.{js,jsx}', '!./example/build/*.js', '!./example/js/*.js'],
     function(files, cb) {
@@ -65,7 +47,6 @@ gulp.task('watch-example', ['build-js', 'build-example'], function() {
         }
       }
 
-      gulp.start('build-example', cb);
     }
   );
 });
@@ -83,9 +64,9 @@ gulp.task('example-server', function() {
   });
 });
 
-gulp.task('build', ['build-js', 'build-example', 'build-example-scss']);
+gulp.task('build', ['build-js', 'build-example-scss']);
 
-gulp.task('develop-example', ['build-example', 'build-example-scss', 'watch-example', 'watch-example-scss', 'example-server']);
+gulp.task('develop-example', ['build-example-scss', 'watch-example', 'watch-example-scss', 'example-server']);
 
 gulp.task('develop', ['watch-js', 'watch-example', 'watch-example-scss', 'example-server']);
 
