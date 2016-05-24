@@ -61,6 +61,7 @@
     "lodash": "^4.12.0",
     "node-sass": "^3.7.0",
     "raw-loader": "^0.5.1",
+    "react": "^15.1.0",
     "react-tools": "^0.13.3",
     "reactify": "^1.1.1",
     "transform-loader": "^0.2.3",
@@ -69,6 +70,6 @@
     "webpack-dev-server": "^1.14.1"
   },
   "peerDependencies": {
-    "react": "15.0.0"
+    "react": "^15.1.0"
   }
 }
