@@ -1,6 +1,7 @@
 "use strict";
 
-var React = require('react/addons');
+var React = require('react');
+var elementSize = require("element-size");
 
 var LazyRender = React.createClass({
   propTypes: {
@@ -44,7 +45,7 @@ var LazyRender = React.createClass({
   },
 
   onScroll: function() {
-    var container = React.findDOMNode(this.refs.container);
+    var container = this.refs.container;
     var scrollTop = container.scrollTop;
     var childrenLength = this.getChildrenLength(this.props);
 
@@ -92,7 +93,7 @@ var LazyRender = React.createClass({
       var marginBottom = parseFloat(elementStyle.getPropertyValue('margin-bottom')) || 0
       var paddingTop = parseFloat(elementStyle.getPropertyValue('padding-top')) || 0
       var paddingBottom = parseFloat(elementStyle.getPropertyValue('padding-bottom')) || 0
-      
+
       height += borderTop + borderBottom + marginTop + marginBottom + paddingTop + paddingBottom;
     }
 
@@ -181,8 +182,8 @@ var LazyRender = React.createClass({
 
   getChildHeight: function() {
     var firstChild = this.refs['child-0'];
-    var el = React.findDOMNode(firstChild);
-    return this.getElementHeight(el);
+
+    return this.getElementHeight(firstChild);
   },
 
   generateChildren: function() {
@@ -235,16 +236,17 @@ var LazyRender = React.createClass({
 
   render: function() {
     var children = this.getChildren();
-
+    var childHeight = (this.state.childHeight) ? this.state.childHeight : 0;
+    var childrenBottom = (this.state.childrenBottom) ? this.state.childrenBottom : 0;
     children.unshift(
       <div style={
-        { height: this.state.childrenTop * this.state.childHeight }
+        { height: this.state.childrenTop * childHeight }
       } key="top"></div>
     );
 
     children.push(
       <div style={
-        { height: this.state.childrenBottom * this.state.childHeight }
+        { height: childrenBottom * childHeight }
       } key="bottom"></div>
     );
 
