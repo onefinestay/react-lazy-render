@@ -1,6 +1,7 @@
 "use strict";
 
 var React = require('react');
+var ReactDOM = require('react-dom');
 var elementSize = require("element-size");
 
 var LazyRender = React.createClass({
@@ -49,7 +50,16 @@ var LazyRender = React.createClass({
     var scrollTop = container.scrollTop;
     var childrenLength = this.getChildrenLength(this.props);
 
-    var childrenTop = Math.floor(scrollTop / this.state.childHeight);
+    var oldChildTop = this.state.childrenTop;
+    var calcTop = scrollTop / this.state.childHeight;
+    var tolerance = 0.1;
+
+    var childrenTop = oldChildTop
+
+    if(Math.abs(oldChildTop - calcTop) > tolerance) {
+      childrenTop = Math.floor(calcTop);
+    }
+
     var childrenBottom = (childrenLength - childrenTop -
                           this.state.childrenToRender);
 
@@ -181,7 +191,7 @@ var LazyRender = React.createClass({
   },
 
   getChildHeight: function() {
-    var firstChild = this.refs['child-0'];
+    var firstChild = ReactDOM.findDOMNode(this.refs['child-0']);
 
     return this.getElementHeight(firstChild);
   },
@@ -211,12 +221,7 @@ var LazyRender = React.createClass({
     var start = this.state.childrenTop;
     var end = this.state.childrenTop + this.state.childrenToRender;
 
-    var children = this.props.children;
-    if(React.Children.count(children) === 1) {
-      children = [children];
-    }
-
-    var childrenToRender = children.slice(start, end);
+    var childrenToRender = this.props.children.slice(start, end);
 
     return childrenToRender.map(function(child, index) {
       if (index === 0) {

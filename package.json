@@ -19,7 +19,8 @@
   },
   "scripts": {
     "test": "jest",
-    "dev": "./node_modules/.bin/webpack-dev-server --inline --hot"
+    "dev": "webpack-dev-server --inline --hot",
+    "build": "gulp build"
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/preprocessor.js",
