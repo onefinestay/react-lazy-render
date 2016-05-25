@@ -5,9 +5,10 @@ jest.dontMock('../LazyRender.jsx');
 jest.dontMock('element-size');
 
 describe('LazyRender', function() {
-  var React = require('react/addons');
+  var React = require('react');
+  var ReactDOM = require('react-dom');
   var LazyRender = require('../LazyRender.jsx');
-  var TestUtils = React.addons.TestUtils;
+  var TestUtils = require('react-addons-test-utils');
 
   function makeComponent(childCount, props) {
     props = props || {};
@@ -19,7 +20,7 @@ describe('LazyRender', function() {
 
     var div = document.createElement('div');
     document.body.appendChild(div);
-    var component = React.render(<LazyRender maxHeight={200} {...props}>{children}</LazyRender>, div);
+    var component = ReactDOM.render(<LazyRender maxHeight={200} {...props}>{children}</LazyRender>, div);
 
     return component;
   }
@@ -94,4 +95,3 @@ describe('LazyRender', function() {
     expect(renderedChildren.length).toEqual(1);
   })
 });
-
