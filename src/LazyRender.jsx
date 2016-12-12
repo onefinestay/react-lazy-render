@@ -75,6 +75,9 @@ var LazyRender = React.createClass({
   },
 
   getHeight: function(numChildren, childHeight, maxHeight) {
+    return maxHeight;
+    // Return the maxHeight as a stop gap fix for now because the calculation below
+    // is incorrect because the getElementHeight function is slightly innacurate for unknown reasons
     var fullHeight = numChildren * childHeight;
     if (fullHeight < maxHeight) {
       return fullHeight;
