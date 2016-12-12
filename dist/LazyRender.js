@@ -105,9 +105,14 @@ var LazyRender = React.createClass({displayName: "LazyRender",
       var paddingBottom = parseFloat(elementStyle.getPropertyValue('padding-bottom')) || 0
 
       height += borderTop + borderBottom + marginTop + marginBottom + paddingTop + paddingBottom;
+      return height;
+    }
+    // Modern browsers
+    else {
+      var marginTop = parseInt(window.getComputedStyle(element).marginTop);
+      return elementSize(element)[1] - marginTop; //remove one margin since the margins are shared by adjacent elements
     }
 
-    return height;
   },
 
   getChildrenLength: function(props) {

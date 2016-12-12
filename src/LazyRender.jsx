@@ -105,9 +105,14 @@ var LazyRender = React.createClass({
       var paddingBottom = parseFloat(elementStyle.getPropertyValue('padding-bottom')) || 0
 
       height += borderTop + borderBottom + marginTop + marginBottom + paddingTop + paddingBottom;
+      return height;
+    }
+    // Use this height calculation for Modern browsers, it will include all the borders/margins needed to be accurate
+    else {
+      var marginTop = parseInt(window.getComputedStyle(element).marginTop);
+      return elementSize(element)[1] - marginTop; //remove one margin since the margins are shared by adjacent elements
     }
 
-    return height;
   },
 
   getChildrenLength: function(props) {
