@@ -1,7 +1,7 @@
 "use strict";
 
-var React = require('react/addons');
-var CodeSnippet = require('./code-snippet');
+var React = require('react');
+var CodeSnippet = require('./code-snippet.jsx');
 
 var Install = React.createClass({
   render: function() {

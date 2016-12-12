@@ -1,9 +1,10 @@
 "use strict";
 
-var React = require('react/addons');
-var Index = React.createFactory(require('../index.jsx'));
+var React = require('react');
+var ReactDOM = require('react-dom');
+var Index = require('../index.jsx');
 
-React.render(
-  Index(),
-  document
+ReactDOM.render(
+  <Index />,
+  document.getElementById('app-container')
 );
